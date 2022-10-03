@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="../WEB-INF/templates/main.xhtml">
+
+    <ui:define name="title">Fiche produit</ui:define>
+
+    <ui:define name="body">
+        <h:form enctype="multipart/form-data">
+            <p:messages globalOnly="true"/>
+            <p:panelGrid columns="3">
+                <p:outputLabel for="libelle">Libellé</p:outputLabel>
+                <p:inputText id="libelle" value="#{produitFicheBean.produit.libelle}"/>
+                <p:message for="libelle"/>
+
+                <p:outputLabel for="desc">Description</p:outputLabel>
+                <p:inputTextarea  id="desc" value="#{produitFicheBean.produit.description}"/>
+                <p:message for="desc"/>
+
+                <p:outputLabel for="prix">Prix HT</p:outputLabel>
+                <p:inputNumber id="prix" value="#{produitFicheBean.produit.prixHT}" decimalPlaces="2" minValue="0"/>
+                <p:message for="prix"/>
+
+                <p:outputLabel for="poids">Poids (Kg)</p:outputLabel>
+                <p:inputNumber id="poids" value="#{produitFicheBean.produit.poidsKg}" decimalPlaces="2" minValue="0"/>
+                <p:message for="poids"/>
+
+                <p:outputLabel for="categorie">Catégorie</p:outputLabel>
+                <p:selectOneMenu id="categorie" value="#{produitFicheBean.produit.categorie}" converter="#{genericConverter}" filter="true" filterMatchMode="startsWith">
+                    <f:selectItem itemValue="#{null}" itemLabel="Aucun" />
+                    <f:selectItems value="#{produitFicheBean.categorieList}" var="c" itemLabel="#{c.libelle}" itemValue="#{c}" />
+                </p:selectOneMenu>
+                <p:message for="categorie"/>
+
+                <p:outputLabel for="marque">Marque</p:outputLabel>
+                <p:selectOneMenu id="marque" value="#{produitFicheBean.produit.marque}" converter="#{genericConverter}" filter="true" filterMatchMode="startsWith">
+                    <f:selectItem itemValue="#{null}" itemLabel="Aucun" />
+                    <f:selectItems value="#{produitFicheBean.marqueList}" var="m" itemLabel="#{m.libelle}" itemValue="#{m}" />
+                </p:selectOneMenu>
+                <p:message for="marque"/>
+
+                <p:outputLabel for="file" value="Image" />
+                <p:fileUpload id="file" value="#{produitFicheBean.file}"
+                              mode="simple" skinSimple="true" />
+                <p:message for="file"  />
+
+                <p:commandButton value="Valider" action="liste.xhtml?faces-redirect=true" actionListener="#{produitFicheBean.valider()}" process="@form" update="@form growl"/>
+                <p:commandButton value="Retour" action="liste.xhtml?faces-redirect=true" immediate="true" styleClass="ui-button-secondary"/>
+        </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

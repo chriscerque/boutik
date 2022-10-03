@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:of="http://omnifaces.org/functions" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:o="http://omnifaces.org/ui"
+                template="../WEB-INF/templates/main.xhtml">
+
+    <ui:define name="title">Fiche commande</ui:define>
+
+    <ui:define name="body">
+        <h:form enctype="multipart/form-data">
+            <p:messages globalOnly="true"/>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="date">Date</p:outputLabel>
+                <p:outputLabel id="date"
+                               value="#{of:formatDate(commandeFicheBean.commande.dateCommande, 'dd/MM/yyyy HH:mm:ss')}"/>
+
+
+                <p:outputLabel for="prix">Prix</p:outputLabel>
+                <p:outputLabel id="prix" value="#{commandeFicheBean.commande.prix}"/>
+
+                <p:outputLabel for="login">Client</p:outputLabel>
+                <p:outputLabel id="login" value="#{commandeFicheBean.commande.user.login}"/>
+
+                <p:outputLabel for="etat">Etat</p:outputLabel>
+                <p:outputLabel id="etat" value="#{commandeFicheBean.commande.etat.name()}"/>
+
+
+                <ui:remove>
+                    <p:commandButton value="Valider" action="liste.xhtml?faces-redirect=true"
+                                     actionListener="#{commandeFicheBean.valider()}" process="@form"
+                                     update="@form growl"/>
+                </ui:remove>
+                <p:commandButton value="Retour" action="liste.xhtml?faces-redirect=true" immediate="true"
+                                 styleClass="ui-button-secondary"/>
+            </p:panelGrid>
+
+            <p:dataTable value="#{commandeFicheBean.commande.produits.entrySet()}" var="c" lazy="false"
+                         paginator="true" rows="10" widgetVar="wv"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                         rowsPerPageTemplate="5,10,15">
+
+                <p:column headerText="Libellé" sortBy="#{c.key.libelle}" filterBy="#{c.key.libelle}">
+                    #{c.key.libelle}
+                </p:column>
+
+                <p:column headerText="Prix HT" sortBy="#{c.key.prixHT}" filterBy="#{c.key.prixHT}">
+                    #{c.key.prixHT} €
+                </p:column>
+
+                <p:column headerText="Poids (Kg)" sortBy="#{c.key.poidsKg}" filterBy="#{c.key.poidsKg}">
+                    #{c.key.poidsKg}
+                </p:column>
+
+                <p:column headerText="Catégorie" sortBy="#{c.key.categorie.libelle}" filterBy="#{c.key.categorie}">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('wv').filter()" styleClass="ui-custom-filter" filter="true"
+                                         filterMatchMode="startsWith" converter="#{genericConverter}">
+                            <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{commandeFicheBean.categorieList}" var="cat"
+                                           itemLabel="#{cat.libelle}"
+                                           itemValue="#{cat}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    #{c.key.categorie.libelle}
+                </p:column>
+
+                <p:column headerText="Marque" sortBy="#{c.key.marque.libelle}" filterBy="#{c.key.marque}">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('wv').filter()" styleClass="ui-custom-filter" filter="true"
+                                         filterMatchMode="startsWith" converter="#{genericConverter}">
+                            <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{commandeFicheBean.produitList}" var="m" itemLabel="#{m.libelle}"
+                                           itemValue="#{m}"/>
+                        </p:selectOneMenu>
+                    </f:facet>
+                    #{c.key.marque.libelle}
+                </p:column>
+
+                <p:column headerText="Logo">
+                    <o:graphicImage value="#{c.key.image}" dataURI="true"
+                                    rendered="#{c.key.image !=null}" style="max-height:100px"/>
+                </p:column>
+
+                <p:column headerText="Actions" style="text-align: right">
+                    <p:commandButton action="/produit/fiche.xhtml?faces-redirect=true"
+                                     actionListener="#{produitListeBean.modifier(c)}" icon="pi pi-pencil"
+                                     rendered="#{sessionBean.canAction('produit.update')}"/>
+                    <p:commandButton actionListener="#{produitListeBean.delete(c)}" process="@form" update="@form growl"
+                                     icon="pi pi-trash" styleClass="ui-button-danger"
+                                     rendered="#{sessionBean.canAction('produit.delete')}">
+                        <p:confirm type="popup" header="Confirmation" message="Etes vous sûre?"
+                                   icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,44 @@
+{
+  "ADMIN": {
+    "uris": [
+      "/categorie/liste.xhtml",
+      "/marque/liste.xhtml",
+      "/categorie/fiche.xhtml",
+      "/marque/fiche.xhtml",
+      "/produit/fiche.xhtml",
+      "/commande/liste.xhtml",
+      "/commande/fiche.xhtml"
+    ],
+    "actions": [
+      "categorie.create",
+      "categorie.update",
+      "categorie.delete",
+      "marque.create",
+      "marque.update",
+      "marque.delete",
+      "produit.create",
+      "produit.update",
+      "produit.delete",
+      "commande.update",
+      "commande.delete"
+    ]
+  },
+  "USER": {
+    "uris": [
+      "/produit/liste.xhtml",
+      "/index.xhtml"
+    ],
+    "actions": [
+    ]
+  },
+  "ALWAYS": {
+    "uris": [
+      "/produit/liste.xhtml",
+      "/produit/fiche.xhtml",
+      "/security/login.xhtml"
+    ],
+    "actions": [
+      "produit.create"
+    ]
+  }
+}

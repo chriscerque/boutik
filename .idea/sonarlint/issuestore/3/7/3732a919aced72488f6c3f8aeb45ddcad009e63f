@@ -1,0 +1,16 @@
+
+f
+java:S1192"KDefine a constant instead of duplicating this literal "user.login" 4 times.(Â„Øøÿÿÿÿ
+c
+java:S1192&"MDefine a constant instead of duplicating this literal "dateCommande" 6 times.(Ò´º
+7
+java:S1643C"Use a StringBuilder instead.(Ş¨ÙÔûÿÿÿÿ
+t
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(Ñş•ÿúÿÿÿÿ8øâËì¸0
+Z	java:S106Z"9Replace this use of System.out or System.err by a logger.(Åî¯¼úÿÿÿÿ8ıâËì¸0
+T
+java:S1135Y"2Complete the task associated to this TODO comment.(öá‡‘ûÿÿÿÿ8ıâËì¸0
+Z	java:S106o"9Replace this use of System.out or System.err by a logger.(ä´€øÿÿÿÿ8ÿâËì¸0
+T
+java:S1135n"2Complete the task associated to this TODO comment.(öá‡‘ûÿÿÿÿ8ÿâËì¸0
+S	java:S106p"9Replace this use of System.out or System.err by a logger.(ˆÈ÷³úÿÿÿÿ

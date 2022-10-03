@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      template="../WEB-INF/templates/main.xhtml">
+
+    <ui:define name="title">Liste des catégories</ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <p:commandButton action="/categorie/fiche.xhtml?faces-redirect=true" value="Créer" icon="pi pi-plus" rendered="#{sessionBean.canAction('categorie.create')}"/>
+            <p:dataTable value = "#{categorieListeBean.categorieList}" var="c" lazy="true"
+                     paginator="true" rows="10" widgetVar="wv"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,15">
+
+                <p:column headerText="Libellé" sortBy="#{c.libelle}" filterBy="#{c.libelle}">
+                    #{c.libelle}
+                </p:column>
+
+                <p:column headerText="Catégorie parente" sortBy="#{c.pere.libelle}" filterBy="#{c.pere.libelle}">
+                    <f:facet name="filter">
+                        <p:selectOneMenu onchange="PF('wv').filter()" styleClass="ui-custom-filter" filter="true" filterMatchMode="startsWith">
+                            <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItems value="#{categorieListeBean.categorieListFilter}" var="c2" itemLabel="#{c2.libelle}" itemValue="#{c2.libelle}" />
+                        </p:selectOneMenu>
+                    </f:facet>
+                    #{c.pere.libelle}
+                </p:column>
+
+                <p:column headerText="Actions" style="text-align: right">
+                    <p:commandButton action="/categorie/fiche.xhtml?faces-redirect=true" actionListener="#{categorieListeBean.modifier(c)}" icon="pi pi-pencil"  rendered="#{sessionBean.canAction('categorie.update')}"/>
+                    <p:commandButton actionListener="#{categorieListeBean.delete(c)}" process="@form" update="@form growl" icon="pi pi-trash"  styleClass="ui-button-danger" rendered="#{sessionBean.canAction('categorie.delete')}">
+                        <p:confirm type="popup" header="Confirmation" message="Etes vous sûre?" icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <p:confirmPopup global="true">
+                <p:commandButton value="Non" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                <p:commandButton value="Oui" type="button" styleClass="ui-confirm-popup-yes" />
+            </p:confirmPopup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

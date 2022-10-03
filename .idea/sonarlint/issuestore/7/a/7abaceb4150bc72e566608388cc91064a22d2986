@@ -1,0 +1,13 @@
+
+
+java:S1186#"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.( Üó8¦Åöğ·0
+g
+java:S1124"EReorder the modifiers to comply with the Java Language Specification.(Ö”£ëúÿÿÿÿ8û¨ÆÃ·0
+f
+java:S1128"IRemove this unused import 'net.ent.etrs.boutik.model.entities.Categorie'.(¹ëï÷8¹Âøğ·0
+\
+java:S1128	"?Remove this unused import 'org.primefaces.model.LazyDataModel'.(ÔÙ«È8åŒ²ò·0
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8µ—úğ·0
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8ºÂøğ·0

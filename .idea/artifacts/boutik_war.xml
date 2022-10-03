@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="boutik:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>boutik</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="boutik-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="boutik:war exploded" />
+    </root>
+  </artifact>
+</component>

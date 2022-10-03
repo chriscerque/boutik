@@ -1,0 +1,17 @@
+
+l
+java:S1192+"JDefine a constant instead of duplicating this literal "categorie" 6 times.(§ÉßŠÿÿÿÿÿ8ş”Ó–¸0
+^
+java:S1192"HDefine a constant instead of duplicating this literal "libelle" 6 times.(Ä¼àÃ
+]
+java:S1192#"GDefine a constant instead of duplicating this literal "prixHT" 6 times.(¾¡ãá
+d
+java:S1192/"GDefine a constant instead of duplicating this literal "marque" 6 times.(±èÌ³8 ®Ó–¸0
+e
+java:S1192'"HDefine a constant instead of duplicating this literal "poidsKg" 6 times.(‡ÔòÁ8íóÒ–¸0
+1
+java:S1643J"Use a StringBuilder instead.(˜¬À[
+g
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.(¶¡¨
+j
+java:S1128"HRemove this unused import 'net.ent.etrs.boutik.model.daos.DaoCategorie'.(÷êŒ·úÿÿÿÿ8ëÖé–¸0
